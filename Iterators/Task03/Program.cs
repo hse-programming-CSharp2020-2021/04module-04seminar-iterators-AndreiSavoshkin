@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using System.Text;
+using System.Linq;
 
 /* На вход подается число N.
  * На каждой из следующих N строках записаны ФИО человека, 
@@ -93,9 +94,15 @@ namespace Task03
         {
             get
             {
+                var sort = from person in _people
+                                     orderby person.lastName
+                                    select person;
                 Person[] sortPeople = new Person[_people.Length];
-                Array.Copy(_people, sortPeople, _people.Length);
-                Array.Sort(sortPeople, (a, b) => a.lastName.CompareTo(b.lastName));
+                int count = 0;
+                foreach (Person item in sort)
+                {
+                    sortPeople[count++] = item;
+                }
                 return sortPeople;
             }
         }
