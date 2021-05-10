@@ -39,9 +39,9 @@ namespace Task03
             try
             {
                 CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
-                int N = int.Parse(Console.ReadLine());
+                long N = long.Parse(Console.ReadLine());
                 Person[] people = new Person[N];
-                for (int i = 0; i < N; i++)
+                for (long i = 0; i < N; i++)
                 {
                     string[] name = Console.ReadLine().Split();
                     people[i] = new Person(name[0], name[1]);

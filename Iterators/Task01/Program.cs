@@ -24,7 +24,7 @@ namespace Task01
         {
             try
             {
-                long value = int.Parse(Console.ReadLine());
+                long value = long.Parse(Console.ReadLine());
                 foreach (int el in Fibonacci(value))
                 {
                     Console.Write(el + " ");
