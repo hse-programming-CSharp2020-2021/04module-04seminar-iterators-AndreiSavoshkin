@@ -30,7 +30,8 @@ namespace Task05
         {
             try
             {
-                MyDigits myDigits = new MyDigits();
+                int value = int.Parse(Console.ReadLine());
+                MyDigits myDigits = new MyDigits(value);
                 IEnumerator enumerator = myDigits.MyEnumerator(value);
 
                 IterateThroughEnumeratorWithoutUsingForeach(enumerator);
@@ -51,16 +52,58 @@ namespace Task05
 
         static void IterateThroughEnumeratorWithoutUsingForeach(IEnumerator enumerator)
         {
+            string output = "";
+            while (enumerator.MoveNext())
+            {
+                output += enumerator.Current + " ";
+            }
+            Console.Write(output.Remove(output.Length - 1));
         }
     }
 
     class MyDigits : IEnumerator // НЕ МЕНЯТЬ ЭТУ СТРОКУ
     {
+        int position = -1;
+        int value;
+        bool isReserve = false;
+        public MyDigits(int value)
+        {
+            this.value = value;
+        }
+        public object Current => Math.Pow(position + 1, 10);
 
         public bool MoveNext()
         {
-           
+            if (!isReserve)
+            {
+                if (position + 1 == value)
+                {
+                    Reset();
+                    return false;
+                }
+                position++;
+                return true;
+            }
+            if (position - 1 == -1)
+            {
+                Reset();
+                return false;
+            }
+            position--;
+            return true;
         }
 
+        public void Reset()
+        {
+            position = isReserve ? -1 : value;
+            isReserve = !isReserve;
+
+        }
+
+        internal IEnumerator MyEnumerator(int value)
+        {
+            this.value = value;
+            return this;
+        }
     }
 }

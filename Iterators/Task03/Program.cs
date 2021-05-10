@@ -37,21 +37,26 @@ namespace Task03
         {
             try
             {
-                int N =
+                int N = int.Parse(Console.ReadLine());
                 Person[] people = new Person[N];
-
+                for (int i = 0; i < N; i++)
+                {
+                    string[] name = Console.ReadLine().Split();
+                    people[i] = new Person(name[0], name[1]);
+                }
                 People peopleList = new People(people);
 
-                foreach (Person p in peopleList)
+                foreach (Person p in peopleList.GetPeople)
                     Console.WriteLine(p);
 
-                foreach (Person p in peopleList.GetPeople)
+                foreach (Person p in peopleList)
                     Console.WriteLine(p);
             }
             catch (ArgumentException)
             {
                 Console.Write("error");
             }
+            Console.ReadLine();
         }
     }
 
@@ -65,8 +70,10 @@ namespace Task03
             this.firstName = firstName;
             this.lastName = lastName;
         }
-
-    
+        public override string ToString()
+        {
+            return $"{firstName} {lastName[0]}.";
+        }
     }
 
 
@@ -75,11 +82,19 @@ namespace Task03
         private Person[] _people;
         public Person[] GetPeople
         {
-            get {
-                return _people;
+            get
+            {
+                Person[] sortPeople = new Person[_people.Length];
+                Array.Copy(_people, sortPeople, _people.Length);
+                Array.Sort(sortPeople, (a, b) => a.lastName.CompareTo(b.lastName));
+                return sortPeople;
             }
         }
-        
+        public People(Person[] persons)
+        {
+            _people = persons;
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -90,27 +105,41 @@ namespace Task03
             return new PeopleEnum(_people);
         }
     }
-    
+
     public class PeopleEnum : IEnumerator
     {
         public Person[] _people;
-
-      
+        private int position = -1;
+        public PeopleEnum(Person[] people)
+        {
+            _people = people;
+        }
 
         public bool MoveNext()
         {
-            
+            if (position == _people.Length - 1)
+            {
+                Reset();
+                return false;
+            }
+            position++;
+            return true;
         }
 
         public void Reset()
         {
-            
+            position = -1;
         }
-       
+
 
         public Person Current
         {
-            
+            get
+            {
+                return _people[position];
+            }
         }
+
+        object IEnumerator.Current => Current;
     }
 }
