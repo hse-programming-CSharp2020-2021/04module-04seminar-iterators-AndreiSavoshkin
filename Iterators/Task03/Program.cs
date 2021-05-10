@@ -38,10 +38,14 @@ namespace Task03
         {
             try
             {
-                CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
-                long N = long.Parse(Console.ReadLine());
+                CultureInfo.CurrentCulture = new CultureInfo("ru-RU"); 
+                int N;
+                if (!int.TryParse(Console.ReadLine(), out N))
+                {
+                    throw new ArgumentException();
+                }
                 Person[] people = new Person[N];
-                for (long i = 0; i < N; i++)
+                for (int i = 0; i < N; i++)
                 {
                     string[] name = Console.ReadLine().Split();
                     people[i] = new Person(name[0], name[1]);
@@ -50,7 +54,7 @@ namespace Task03
 
                 foreach (Person p in peopleList.GetPeople)
                     Console.WriteLine(p);
-
+                Console.WriteLine();
                 foreach (Person p in peopleList)
                     Console.WriteLine(p);
             }
