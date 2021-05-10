@@ -39,6 +39,7 @@ namespace Task03
         {
             try
             {
+                CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
                 Console.OutputEncoding = Encoding.UTF8;
                 int N;
                 if (!int.TryParse(Console.ReadLine(), out N))
