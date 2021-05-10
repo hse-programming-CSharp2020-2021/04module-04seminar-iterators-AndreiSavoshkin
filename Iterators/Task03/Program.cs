@@ -55,10 +55,10 @@ namespace Task03
                 People peopleList = new People(people);
 
                 foreach (Person p in peopleList.GetPeople)
-                    Console.WriteLine(p);
+                    Console.WriteLine(p.ToString(), Encoding.UTF8);
                 Console.WriteLine();
                 foreach (Person p in peopleList)
-                    Console.WriteLine(p);
+                    Console.WriteLine(p.ToString(), Encoding.UTF8);
             }
             catch (Exception)
             {
