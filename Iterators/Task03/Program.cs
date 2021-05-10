@@ -3,6 +3,7 @@ using System.Collections;
 using System.Globalization;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 /* На вход подается число N.
  * На каждой из следующих N строках записаны ФИО человека, 
@@ -94,16 +95,12 @@ namespace Task03
         {
             get
             {
-                var sort = from person in _people
-                                     orderby person.lastName
-                                    select person;
-                Person[] sortPeople = new Person[_people.Length];
-                int count = 0;
-                foreach (Person item in sort)
-                {
-                    sortPeople[count++] = item;
-                }
-                return sortPeople;
+                var persons = new List<Person>();
+                for (int i = 0; i < _people.Length; i++)
+                    persons.Add(_people[i]);
+
+                persons.Sort((a, b) => a.lastName.CompareTo(b.lastName));
+                return persons.ToArray();
             }
         }
         public People(Person[] persons)
