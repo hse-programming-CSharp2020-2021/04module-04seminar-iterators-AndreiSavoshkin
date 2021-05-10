@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 
 /* На вход подается число N.
  * На каждой из следующих N строках записаны ФИО человека, 
@@ -37,6 +38,7 @@ namespace Task03
         {
             try
             {
+                CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
                 int N = int.Parse(Console.ReadLine());
                 Person[] people = new Person[N];
                 for (int i = 0; i < N; i++)
@@ -72,7 +74,7 @@ namespace Task03
         }
         public override string ToString()
         {
-            return $"{firstName} {lastName[0]}.";
+            return $"{firstName[0].ToString().ToUpper()}{firstName.Substring(1, firstName.Length - 2)} {lastName[0].ToString().ToUpper()}.";
         }
     }
 

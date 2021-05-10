@@ -30,7 +30,11 @@ namespace Task05
         {
             try
             {
-                int value = int.Parse(Console.ReadLine());
+                int value;
+                if (!int.TryParse(Console.ReadLine(), out value))
+                {
+                    throw new ArgumentException();
+                }
                 MyDigits myDigits = new MyDigits(value);
                 IEnumerator enumerator = myDigits.MyEnumerator(value);
 

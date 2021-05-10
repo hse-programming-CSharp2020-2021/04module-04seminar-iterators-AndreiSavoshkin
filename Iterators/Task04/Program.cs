@@ -27,7 +27,11 @@ namespace Task04
         {
             try
             {
-                int value = int.Parse(Console.ReadLine());
+                int value;
+                if (!int.TryParse(Console.ReadLine(), out value))
+                {
+                    throw new ArgumentException();
+                }
                 if (value <= 0)
                 {
                     throw new ArgumentException();
