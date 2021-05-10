@@ -74,7 +74,12 @@ namespace Task02
             try
             {
                 int startingIndex = int.Parse(Console.ReadLine());
-                string[] values = Console.ReadLine().Replace("  ", " ").Split();
+                string input = Console.ReadLine();
+                while (input.Contains("  "))
+                {
+                    input = input.Replace("  ", " ");
+                }
+                string[] values = input.Split();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");
