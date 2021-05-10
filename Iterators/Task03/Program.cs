@@ -74,7 +74,7 @@ namespace Task03
         }
         public override string ToString()
         {
-            return $"{firstName[0].ToString().ToUpper()}{firstName.Substring(1, firstName.Length - 2)} {lastName[0].ToString().ToUpper()}.";
+            return $"{firstName[0].ToString().ToUpper()}{firstName.Substring(1, firstName.Length - 1)} {lastName[0].ToString().ToUpper()}.";
         }
     }
 
